@@ -1,19 +1,21 @@
 import pandas as pd
 from collections import Counter
 
-class AccuracyPrediction:
+class auxiliar_methods:
     #Empty constructor
     def __init__(self):
         pass
         
     #Method that return the base hit rate
-    def base_accuracy(markings):
+    @classmethod
+    def base_accuracy(self, markings):
         base_hit = max(Counter(markings).values())
         base_hit_rate = 100.0 * base_hit / len(markings)
         return base_hit_rate
 
     #Method that fit and predict the model hit rate
-    def model_fit_and_predict(model, training_data, training_markups, test_data, test_markups):
+    @classmethod
+    def model_fit_and_predict(self, model, training_data, training_markups, test_data, test_markups):
         model.fit(training_data, training_markups)
 
         result = model.predict(test_data)
@@ -29,7 +31,8 @@ class AccuracyPrediction:
         return hit_rate
 
     #Method that predict the model hit_rate
-    def model_predict(model, validation_data, validation_markups):
+    @classmethod
+    def model_predict(self, model, validation_data, validation_markups):
         result = model.predict(validation_data)
         hits = result == validation_markups
 
