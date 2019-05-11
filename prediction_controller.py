@@ -1,4 +1,5 @@
 import pandas as pd
+from auxiliar_methods import AuxiliarMethods
 
 class PredictionController:
     #Empty constructor
@@ -38,11 +39,11 @@ class PredictionController:
         #Using the model_accuracy definition in AccuracyPrediction to get accuracy rate
         from sklearn.naive_bayes import MultinomialNB
         multinomialModel = MultinomialNB()
-        multinomialAccuracy = auxiliar_methods().model_fit_and_predict(multinomialModel, training_data, training_markups, test_data, test_markups)
+        multinomialAccuracy = AuxiliarMethods().model_fit_and_predict(multinomialModel, training_data, training_markups, test_data, test_markups)
 
         from sklearn.ensemble import AdaBoostClassifier
         adaBoostModel = AdaBoostClassifier()
-        adaBoostAccuracy = auxiliar_methods().model_fit_and_predict(adaBoostModel, training_data, training_markups, test_data, test_markups)
+        adaBoostAccuracy = AuxiliarMethods().model_fit_and_predict(adaBoostModel, training_data, training_markups, test_data, test_markups)
 
         #Chosing the model with higher accuracy
         if multinomialAccuracy > adaBoostAccuracy:
@@ -51,5 +52,5 @@ class PredictionController:
             winner = adaBoostModel
 
         #Real test with the more accurate model
-        test = auxiliar_methods().model_predict(winner, validation_data, validation_markups)
+        test = AuxiliarMethods().model_predict(winner, validation_data, validation_markups)
         return test

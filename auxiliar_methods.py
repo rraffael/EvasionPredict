@@ -1,7 +1,7 @@
 import pandas as pd
 from collections import Counter
 
-class auxiliar_methods:
+class AuxiliarMethods:
     #Empty constructor
     def __init__(self):
         pass
