@@ -1,4 +1,3 @@
-import pandas as pd
 from collections import Counter
 
 class AuxiliarMethods:
@@ -30,15 +29,50 @@ class AuxiliarMethods:
 
         return hit_rate
 
-    #Method that predict the model hit_rate
+    #Method that predict the model answer
     @classmethod
-    def model_predict(self, model, validation_data, validation_markups):
+    def model_predict(self, model, validation_data):
         result = model.predict(validation_data)
-        hits = result == validation_markups
+        return result
 
-        total_hits = sum(hits)
-        total_elements = len(validation_markups)
+    #Method to transform values into binary columns as the model
+    @classmethod
+    def transform_values(self, origem, prouni, tpo_ingresso, sexo, idade):
+        # Atribui valor de origem para binário
+        if origem.upper() == "AJU":
+            origem_bin = [1, 0, 0]
+        elif origem.upper() == "OUTROS":
+            origem_bin = [0, 1, 0]
+        else:
+            origem_bin = [0, 0, 1] 
+            
+        # Atribui valor de prouni para binário
+        if prouni.upper() == "S":
+            prouni_bin = [1, 0]
+        else:
+                prouni_bin = [0, 1]
 
-        hit_rate = 100.0 * total_hits / total_elements
+        # Atribui valor de tipo_ingresso para binário
+        if tpo_ingresso.upper() == "PORTADOR_DIPLOMA":
+            tpo_ingresso_bin = [1, 0, 0, 0, 0]
+        elif tpo_ingresso.upper() == "PROUNI":
+            tpo_ingresso_bin = [0, 1, 0, 0, 0]
+        elif tpo_ingresso.upper() == "TRANSF_EXTERNA":
+            tpo_ingresso_bin = [0, 0, 1, 0, 0]
+        elif tpo_ingresso.upper() == "TRANSF_INTERNA":
+            tpo_ingresso_bin = [0, 0, 0, 1, 0]
+        else:
+            tpo_ingresso_bin = [0, 0, 0, 0, 1]
 
-        return hit_rate
+        # Atribui valor de sexo para binário
+        if sexo.upper() == "M":
+            sexo_bin = [1, 0]
+        else:
+            sexo_bin = [0, 1]
+
+        # Transforma idade de string para int
+        idade_bin = [int(idade)]
+
+        # Concatena todos valores binários na ordem desejada e retorna
+        result = idade_bin + origem_bin + prouni_bin + tpo_ingresso_bin + sexo_bin
+        return result
