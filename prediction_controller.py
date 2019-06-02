@@ -9,10 +9,10 @@ class PredictionController:
 
     def hit_rate(self):
         # File reading
-        db = pd.read_csv('Teste1.csv')
+        db = pd.read_csv('Main.csv')
         
         # Variable association with column attribute and results 
-        X_db = db[['ORIGEM','PROUNI', 'TPO_INGRESSO', 'SEXO', 'IDADE']]
+        X_db = db[['IDADE','ORIGEM_AJU', 'ORIGEM_OUTROS', 'ORIGEM_SE', 'PROUNI_SIM', 'PROUNI_NAO','PORTADOR_DIPLOMA', 'PROUNI', 'TRANSF_EXTERNA', 'TRANSF_INTERNA', 'VESTIBULAR','SEXO_FEMININO', 'SEXO_MASCULINO', 'NOTA']]
         Y_db = db['SITUACAO']
 
         # Converting categorical columns into binary columns and excluding labels
@@ -61,14 +61,14 @@ class PredictionController:
 
         hit_rate = 100.0 * total_hits / total_elements
          
-        return hit_rate
+        return hit_rate # To get base hit_rate, change hit_rate with 'AuxiliarMethods().base_accuracy(test_markups)' 
 
-    def validation(self, origem, prouni, tipo_ingresso, sexo, idade):
+    def validation(self, origem, prouni, tipo_ingresso, sexo, idade, nota):
         # File reading
-        db = pd.read_csv('Teste1.csv')
+        db = pd.read_csv('Main.csv')
         
         # Variable association with column attribute and results 
-        X_db = db[['ORIGEM','PROUNI', 'TPO_INGRESSO', 'SEXO', 'IDADE']]
+        X_db = db[['IDADE','ORIGEM_AJU', 'ORIGEM_OUTROS', 'ORIGEM_SE', 'PROUNI_SIM', 'PROUNI_NAO','PORTADOR_DIPLOMA', 'PROUNI', 'TRANSF_EXTERNA', 'TRANSF_INTERNA', 'VESTIBULAR','SEXO_FEMININO', 'SEXO_MASCULINO', 'NOTA']]
         Y_db = db['SITUACAO']
 
         # Converting categorical columns into binary columns and excluding labels
@@ -104,14 +104,18 @@ class PredictionController:
             winner =  multinomialModel
         else:
             winner = adaBoostModel
-
+        
         # Method to transform parameters into binary columns as the trained model 
-        student =  AuxiliarMethods().transform_values(origem, prouni, tipo_ingresso, sexo, idade)
+        student =  AuxiliarMethods().transform_values(origem, prouni, tipo_ingresso, sexo, idade, nota)
         modeled_student = np.reshape(student, (1, -1))
         
         #Real test with the more accurate model
         answer = AuxiliarMethods().model_predict(winner, modeled_student)
+
+        #Muda a reposta de 0 para Sim ou 1 para Nao
+        if answer == 0:
+            answer = "Sim"
+        elif answer == 1:
+            answer = "Nao"
+        
         return answer
-
-
-    

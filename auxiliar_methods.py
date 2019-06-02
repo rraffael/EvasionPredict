@@ -37,7 +37,7 @@ class AuxiliarMethods:
 
     #Method to transform values into binary columns as the model
     @classmethod
-    def transform_values(self, origem, prouni, tpo_ingresso, sexo, idade):
+    def transform_values(self, origem, prouni, tpo_ingresso, sexo, idade, nota):
         # Atribui valor de origem para binário
         if origem.upper() == "AJU":
             origem_bin = [1, 0, 0]
@@ -65,14 +65,39 @@ class AuxiliarMethods:
             tpo_ingresso_bin = [0, 0, 0, 0, 1]
 
         # Atribui valor de sexo para binário
-        if sexo.upper() == "M":
+        if sexo.upper() == "F":
             sexo_bin = [1, 0]
         else:
             sexo_bin = [0, 1]
 
-        # Transforma idade de string para int
+        # Transforma o valor de idade para inteiro
         idade_bin = [int(idade)]
 
+        # Transforma o valor de nota para inteiro e atribui a nota_bin
+        nota = int(nota)
+        if nota > 9.6:
+            nota_bin = [10]
+        elif nota > 8.6:
+            nota_bin = [9]
+        elif nota > 7.6:
+            nota_bin = [8]
+        elif nota > 6.6:
+            nota_bin = [7]
+        elif nota > 5.6:
+            nota_bin = [6]
+        elif nota > 4.6:
+            nota_bin = [5]
+        elif nota > 3.6:
+            nota_bin = [4]
+        elif nota > 2.6:
+            nota_bin = [3]
+        elif nota > 1.6:
+            nota_bin = [2]
+        elif nota > 0.6:
+            nota_bin = [1]
+        else:
+            nota_bin = [0]
+
         # Concatena todos valores binários na ordem desejada e retorna
-        result = idade_bin + origem_bin + prouni_bin + tpo_ingresso_bin + sexo_bin
+        result = idade_bin + origem_bin + prouni_bin + tpo_ingresso_bin + sexo_bin + nota_bin
         return result
