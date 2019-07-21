@@ -44,3 +44,6 @@ As instruções abaixo mostra como instalar e fazer o projeto rodar, obtendo os 
 ## Authors
 
 * **Raffael de Castro Rodrigues**
+
+## License
+This project is licensed under the BSD License - see the LICENSE file for details
