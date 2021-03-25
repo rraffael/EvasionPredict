@@ -34,6 +34,17 @@ As instruções abaixo mostra como instalar e fazer o projeto rodar, obtendo os 
 5.1 - "/Prediction/HitRate" to get the actual hit rate of the application.
 5.2 -"/Prediction/{Origem}/{Prouni}/{TipoDeIngresso}/{Sexo}/{Idade}/{Nota1Unidade}" to get the prediction of the result as "Sim/Yes" or "Não/No" in json format.
 
+### Results
+
+Architecture Diagram:
+![ArchDiagram](https://user-images.githubusercontent.com/27858619/112487475-a3dfad80-8d74-11eb-975e-1a0816884203.png)
+
+Prediction Accuracy API return:
+![Predict Accuracy](https://user-images.githubusercontent.com/27858619/112487563-bb1e9b00-8d74-11eb-8369-ee6934b82558.png)
+
+Sample API return
+![Sample](https://user-images.githubusercontent.com/27858619/112487987-15b7f700-8d75-11eb-8d13-a23b01b7f949.png)
+
 ## Built With
 
 * [Pandas] (https://pandas.pydata.org/) - Data data analysis tools library used.
