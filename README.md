@@ -37,12 +37,15 @@ As instruções abaixo mostra como instalar e fazer o projeto rodar, obtendo os 
 ### Results
 
 Architecture Diagram:
-![ArchDiagram](https://user-images.githubusercontent.com/27858619/112488475-78a98e00-8d75-11eb-997f-e2bb3af406c6.png)
+
+![ArchDiagram](https://user-images.githubusercontent.com/27858619/112488767-c1f9dd80-8d75-11eb-823f-d5c8ff81f9af.png)
 
 Prediction Accuracy API return:
+
 ![Predict Accuracy](https://user-images.githubusercontent.com/27858619/112488506-7d6e4200-8d75-11eb-883b-e30faf45a56e.png)
 
 Sample API return
+
 ![Sample](https://user-images.githubusercontent.com/27858619/112488525-819a5f80-8d75-11eb-8f8c-903d133f399a.png)
 
 ## Built With
